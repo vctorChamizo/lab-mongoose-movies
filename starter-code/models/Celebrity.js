@@ -11,4 +11,4 @@ const Celebrity = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("celebrity_test", Celebrity);
+module.exports = mongoose.model("celebrity", Celebrity);
