@@ -5,24 +5,9 @@ const Movie = require("../models/Movie");
 // Show all movies
 router.get("/", async (req, res, next) => {
   try {
-    console.log("Entro en movies")
+    console.log("Entro en movies");
     const movies = await Movie.find();
     res.render("movies/index", { title: "Movies | List", movies });
-  } catch (err) {
-    console.error(err);
-    next();
-  }
-});
-
-// Show a specific movie
-router.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    const movie = await Movie.findById(id);
-    res.render("movies/show", {
-      title: `Details | ${movie.title}`,
-      movie
-    });
   } catch (err) {
     console.error(err);
     next();
@@ -80,6 +65,21 @@ router.post("/edit/:id", async (req, res, next) => {
   try {
     await Movie.findByIdAndUpdate(id, { title, genre, plot });
     res.redirect("/movies");
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+});
+
+// Show a specific movie
+router.get("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const movie = await Movie.findById(id);
+    res.render("movies/show", {
+      title: `Details | ${movie.title}`,
+      movie
+    });
   } catch (err) {
     console.error(err);
     next();
